@@ -38,5 +38,6 @@
 
     <!-- Scripts -->
     @include('includes.script')
+    @include('sweetalert::alert')
 </body>
 </html>

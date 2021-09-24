@@ -39,3 +39,18 @@ function rupiah($param)
 {
   return "Rp. " . number_format($param, 0, ',', '.');
 }
+
+function toastCreate($msg)
+{
+  toast($msg . ' berhasil ditambahkan', 'success');
+}
+
+function toastUpdate($msg)
+{
+  toast($msg . ' berhasil diubah', 'success');
+}
+
+function toastDelete($msg)
+{
+  toast($msg . ' telah dihapus', 'success');
+}

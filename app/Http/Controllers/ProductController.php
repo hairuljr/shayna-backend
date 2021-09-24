@@ -41,8 +41,8 @@ class ProductController extends Controller
     {
         $data = $request->validated();
         $data['slug'] = Str::slug($request->name);
-
         Product::create($data);
+        toastCreate('Produk');
         return redirect()->route('products.index');
     }
 
@@ -81,6 +81,7 @@ class ProductController extends Controller
         $data = $request->validated();
         $data['slug'] = Str::slug($request->name);
         $product->update($data);
+        toastUpdate('Produk');
         return redirect()->route('products.index');
     }
 
@@ -94,6 +95,7 @@ class ProductController extends Controller
     {
         $product->delete();
         ProductGallery::where('product_id', $product->id)->delete();
+        toastDelete('Produk');
         return redirect()->route('products.index');
     }
 

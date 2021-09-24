@@ -44,6 +44,7 @@ class ProductGalleryController extends Controller
             'public'
         );
         ProductGallery::create($data);
+        toastCreate('Foto Produk');
         return redirect()->route('product-galleries.index');
     }
 
@@ -87,9 +88,11 @@ class ProductGalleryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ProductGallery $gallery)
+    public function destroy(Request $request, $id)
     {
+        $gallery = ProductGallery::findOrFail($id);
         $gallery->delete();
+        toastDelete('Foto Produk');
         return redirect()->route('product-galleries.index');
     }
 }

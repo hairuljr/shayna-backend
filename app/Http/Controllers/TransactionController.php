@@ -74,6 +74,7 @@ class TransactionController extends Controller
     {
         $data = $request->all();
         $transaction->update($data);
+        toastUpdate('Detail pembeli');
         return redirect()->route('transactions.index');
     }
 
@@ -83,9 +84,11 @@ class TransactionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Transaction $transaction)
     {
-        //
+        $transaction->delete();
+        toastDelete('Transaksi');
+        return redirect()->route('transactions.index');
     }
 
     public function setStatus(Request $request, Transaction $transaction)
@@ -95,6 +98,7 @@ class TransactionController extends Controller
         ]);
         $transaction->transaction_status = $request->status;
         $transaction->save();
+        toastUpdate('Status transaksi');
         return redirect()->route('transactions.index');
     }
 }
