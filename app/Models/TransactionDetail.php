@@ -6,14 +6,19 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Transaction extends Model
+class TransactionDetail extends Model
 {
     use HasFactory, SoftDeletes;
 
     protected $guarded = [];
 
-    public function details()
+    public function transaction()
     {
-        return $this->hasMany(TransactionDetail::class);
+        return $this->belongsTo(Transaction::class);
+    }
+
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
     }
 }

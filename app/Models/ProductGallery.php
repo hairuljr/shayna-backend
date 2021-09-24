@@ -6,14 +6,19 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Transaction extends Model
+class ProductGallery extends Model
 {
     use HasFactory, SoftDeletes;
 
     protected $guarded = [];
 
-    public function details()
+    public function product()
     {
-        return $this->hasMany(TransactionDetail::class);
+        return $this->belongsTo(Product::class);
+    }
+
+    public function getPhotoAttribute($value)
+    {
+        return asset('storage/' . $value);
     }
 }
