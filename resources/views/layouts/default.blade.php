@@ -22,9 +22,11 @@
         @include('includes.navbar')
         <!-- /#header -->
 
-        <!-- Content -->
-        @yield('content')
-        <!-- /.content -->
+        <div class="content">
+            <!-- Content -->
+            @yield('content')
+            <!-- /.content -->
+        </div>
 
         <div class="clearfix"></div>
         
