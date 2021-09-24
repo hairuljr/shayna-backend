@@ -95,8 +95,6 @@ class ProductController extends Controller
     {
         $product->delete();
         ProductGallery::where('product_id', $product->id)->delete();
-        toastDelete('Produk');
-        return redirect()->route('products.index');
     }
 
     public function gallery(Request $request, Product $product)

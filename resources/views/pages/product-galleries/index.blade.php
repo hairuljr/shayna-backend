@@ -31,15 +31,9 @@
                         </td>
                         <td>{{ $item->is_default ? 'Ya' : 'Tidak' }}</td>
                         <td>
-                          <form action="{{ route('product-galleries.destroy', $item->id) }}" 
-                                method="post" 
-                                class="d-inline">
-                            @csrf
-                            @method('delete')
-                            <button class="btn btn-danger btn-sm">
-                              <i class="fa fa-trash"></i>
-                            </button>
-                          </form>
+                          <a href="{{ route('product-galleries.destroy', $item->id) }}" class="btn btn-danger btn-sm deleteAjax" data-id="{{ $item->id }}" data-routeName="Foto Produk">
+                            <i class="fa fa-trash"></i>
+                          </a>
                         </td>
                       </tr>
                     @empty

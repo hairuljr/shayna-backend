@@ -54,3 +54,12 @@ function toastDelete($msg)
 {
   toast($msg . ' telah dihapus', 'success');
 }
+
+function deletePict($path, $picture)
+{
+  if ($picture == 'default.jpg' || $picture == 'default.png') {
+    return true;
+  } else {
+    return Storage::disk('public')->delete('assets/' . $path . '/' . $picture);
+  }
+}

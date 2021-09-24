@@ -53,3 +53,4 @@
     </div>
     <!--Local Stuff-->
     @stack('addon-script')
+    @include('includes.script-delete')

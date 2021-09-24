@@ -38,15 +38,9 @@
                           <a href="{{ route('products.edit', $item->id) }}" class="btn btn-primary btn-sm">
                             <i class="fa fa-pencil"></i>
                           </a>
-                          <form action="{{ route('products.destroy', $item->id) }}" 
-                                method="post" 
-                                class="d-inline">
-                            @csrf
-                            @method('delete')
-                            <button class="btn btn-danger btn-sm">
-                              <i class="fa fa-trash"></i>
-                            </button>
-                          </form>
+                          <a href="{{ route('products.destroy', $item->id) }}" class="btn btn-danger btn-sm deleteAjax" data-id="{{ $item->id }}" data-routeName="Produk">
+                            <i class="fa fa-trash"></i>
+                          </a>
                         </td>
                       </tr>
                     @empty

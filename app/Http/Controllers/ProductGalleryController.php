@@ -91,8 +91,7 @@ class ProductGalleryController extends Controller
     public function destroy(Request $request, $id)
     {
         $gallery = ProductGallery::findOrFail($id);
+        deletePict('products', $gallery->photo);
         $gallery->delete();
-        toastDelete('Foto Produk');
-        return redirect()->route('product-galleries.index');
     }
 }
