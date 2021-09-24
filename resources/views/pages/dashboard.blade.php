@@ -1,5 +1,8 @@
 @extends('layouts.default')
-
+@section('title', 'Admin Dashboard')
+@php
+    use \App\Constants\TransactionStatus;
+@endphp
 @section('content')
   <!-- Animated -->
   <div class="animated fadeIn">
@@ -68,24 +71,12 @@
                             <tbody>
                               @forelse ($items as $item)
                                 <tr>
-                                  <td>{{ $item->id }}</td>
+                                  <td>{{ $loop->iteration }}</td>
                                   <td>{{ $item->name }}</td>
                                   <td>{{ $item->email }}</td>
-                                  <td>{{ $item->number }}</td>
-                                  <td>${{ $item->transaction_total }}</td>
-                                  <td>
-                                    @if($item->transaction_status == 'PENDING')
-                                      <span class="badge badge-info">
-                                    @elseif($item->transaction_status == 'SUCCESS')
-                                      <span class="badge badge-success">
-                                    @elseif($item->transaction_status == 'FAILED')
-                                      <span class="badge badge-warning">
-                                    @else
-                                      <span>
-                                    @endif
-                                      {{ $item->transaction_status }}
-                                      </span>
-                                  </td>
+                                  <td>{{ $item->phone_number }}</td>
+                                  <td>{{ rupiah($item->transaction_total) }}</td>
+                                  <td>{!! TransactionStatus::html($item->transaction_status) !!}</td>
                                 </tr>
                               @empty
                                   <tr>
@@ -130,9 +121,9 @@
 
             // Pie chart flotPie1
             var piedata = [
-                { label: "Pending", data: [[1, {{ $pie['pending']}} ]], color: '#5c6bc0'},
-                { label: "Gagal", data: [[1, {{ $pie['failed']}} ]], color: '#ef5350'},
-                { label: "Sukses", data: [[1, {{ $pie['success']}} ]], color: '#66bb6a'}
+                { label: "Pending", data: [[1, {{ $pie['pending']}} ]], color: '#FFC107'},
+                { label: "Gagal", data: [[1, {{ $pie['failed']}} ]], color: '#DC3545'},
+                { label: "Sukses", data: [[1, {{ $pie['success']}} ]], color: '#28A745'}
             ];
 
             $.plot('#flotPie1', piedata, {
