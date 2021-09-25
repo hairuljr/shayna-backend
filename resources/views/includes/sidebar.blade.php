@@ -25,6 +25,13 @@
               <li class="{{ Route::currentRouteName() == 'transactions.index' || Route::currentRouteName() == 'transactions.edit' ? 'active' :'' }}">
                   <a href="{{ route('transactions.index') }}"> <i class="menu-icon fa fa-list"></i>Lihat Transaksi</a>
               </li>
+              <li class="menu-title">Logo Partner</li><!-- /.menu-title -->
+              <li class="{{ Route::currentRouteName() == 'partners.index' || Route::currentRouteName() == 'partners.edit' ? 'active' :'' }}">
+                  <a href="{{ route('partners.index') }}"> <i class="menu-icon fa fa-slack"></i>Lihat Partner</a>
+              </li>
+              <li class="{{ Route::currentRouteName() == 'partners.create' ? 'active' :'' }}">
+                <a href="{{ route('partners.create') }}"> <i class="menu-icon fa fa-plus"></i>Tambah Partner</a>
+            </li>
           </ul>
       </div><!-- /.navbar-collapse -->
   </nav>

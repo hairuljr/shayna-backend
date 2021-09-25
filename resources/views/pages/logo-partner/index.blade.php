@@ -1,5 +1,5 @@
 @extends('layouts.default')
-@section('title', 'Galeri Produk')
+@section('title', 'List Partner')
 
 @section('content')
     <div class="orders">
@@ -7,7 +7,7 @@
         <div class="col-12">
           <div class="card">
             <div class="card-body">
-              <h4 class="box-title">Daftar Foto Produk</h4>
+              <h4 class="box-title">Daftar Logo Partner</h4>
             </div>
             <div class="card-body--">
               <div class="table-stats order-table ov-h">
@@ -15,30 +15,31 @@
                   <thead>
                     <tr>
                       <th>#</th>
-                      <th>Nama Produk</th>
-                      <th>Foto</th>
-                      <th>Default</th>
+                      <th>Nama Partner</th>
+                      <th>Logo</th>
                       <th>Action</th>
                     </tr>
                   </thead>
                   <tbody>
-                    @forelse ($gallery as $item)
+                    @forelse ($logo as $item)
                       <tr>
                         <td>{{ $loop->iteration }}</td>
-                        <td>{{ $item->product->name }}</td>
+                        <td>{{ $item->name }}</td>
                         <td>
                           <img src="{{ url($item->photo) }}" alt="" />
                         </td>
-                        <td>{{ $item->is_default ? 'Ya' : 'Tidak' }}</td>
                         <td>
-                          <a href="{{ route('product-galleries.destroy', $item->id) }}" class="btn btn-danger btn-sm deleteAjax" data-id="{{ $item->id }}" data-routeName="Foto Produk">
+                          <a href="{{ route('partners.edit', $item->id) }}" class="btn btn-primary btn-sm">
+                            <i class="fa fa-pencil"></i>
+                          </a>
+                          <a href="{{ route('partners.destroy', $item->id) }}" class="btn btn-danger btn-sm deleteAjax" data-id="{{ $item->id }}" data-routeName="Partner">
                             <i class="fa fa-trash"></i>
                           </a>
                         </td>
                       </tr>
                     @empty
                         <tr>
-                          <td colspan="5" class="text-center p-5">
+                          <td colspan="4" class="text-center p-5">
                             Data tidak tersedia
                           </td>
                         </tr>

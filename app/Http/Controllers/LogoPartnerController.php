@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ProductGalleryRequest;
-use App\Models\{Product, ProductGallery};
+use App\Http\Requests\LogoPartnerRequest;
+use App\Models\LogoPartner;
 use Illuminate\Http\Request;
 
-class ProductGalleryController extends Controller
+class LogoPartnerController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +15,8 @@ class ProductGalleryController extends Controller
      */
     public function index()
     {
-        $gallery = ProductGallery::with('product')->get();
-        return view('pages.product-galleries.index', compact('gallery'));
+        $logo = LogoPartner::all();
+        return view('pages.logo-partner.index', compact('logo'));
     }
 
     /**
@@ -26,8 +26,7 @@ class ProductGalleryController extends Controller
      */
     public function create()
     {
-        $products = Product::all();
-        return view('pages.product-galleries.create', compact('products'));
+        return view('pages.logo-partner.create');
     }
 
     /**
@@ -36,16 +35,16 @@ class ProductGalleryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ProductGalleryRequest $request)
+    public function store(LogoPartnerRequest $request)
     {
         $data = $request->validated();
         $data['photo'] = $request->file('photo')->store(
-            'assets/products',
+            'assets/partners',
             'public'
         );
-        ProductGallery::create($data);
-        toastCreate('Foto Produk');
-        return redirect()->route('product-galleries.index');
+        LogoPartner::create($data);
+        toastCreate('Partner');
+        return redirect()->route('partners.index');
     }
 
     /**
@@ -65,9 +64,10 @@ class ProductGalleryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(LogoPartner $partner)
     {
-        //
+        $partners = $partner;
+        return view('pages.logo-partner.edit', compact('partners'));
     }
 
     /**
@@ -77,9 +77,21 @@ class ProductGalleryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(LogoPartnerRequest $request, LogoPartner $partner)
     {
-        //
+        $data = $request->validated();
+        if ($request->photo) {
+            $data['photo'] = $request->file('photo')->store(
+                'assets/partners',
+                'public'
+            );
+            $partner->update($data);
+        } else {
+            $partner->name = $request->name;
+            $partner->save();
+        }
+        toastUpdate('Partner');
+        return redirect()->route('partners.index');
     }
 
     /**
@@ -90,9 +102,9 @@ class ProductGalleryController extends Controller
      */
     public function destroy(Request $request, $id)
     {
-        $gallery = ProductGallery::findOrFail($id);
-        $photo = explode('/', $gallery->photo);
-        deletePict('products', $photo[6]);
-        $gallery->delete();
+        $logo = LogoPartner::findOrFail($id);
+        $photo = explode('/', $logo->photo);
+        deletePict('partners', $photo[6]);
+        $logo->delete();
     }
 }

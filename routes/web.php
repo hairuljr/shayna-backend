@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\LogoPartnerController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductGalleryController;
 use App\Http\Controllers\TransactionController;
@@ -21,4 +22,5 @@ Route::prefix('admin')->middleware('auth')->group(function () {
   Route::resource('product-galleries', ProductGalleryController::class);
   Route::get('transactions/{transaction}/set-status', [TransactionController::class, 'setStatus'])->name('transactions.status');
   Route::resource('transactions', TransactionController::class);
+  Route::resource('partners', LogoPartnerController::class);
 });
